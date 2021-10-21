@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 version="2.0">
+
+    <named-query name="BatchMessage.findAll">
+        <query>
+            select bm
+              from BatchMessage bm
+        </query>
+    </named-query>
+    <named-query name="BatchMessage.countAll">
+        <query>
+            select count(bm)
+              from BatchMessage bm
+        </query>
+    </named-query>
+
+    <named-query name="JmsMessage.findAll">
+        <query>
+            select jm
+            from JmsMessage jm
+        </query>
+    </named-query>
+    <named-query name="JmsMessage.countAll">
+        <query>
+            select count(jm)
+            from JmsMessage jm
+        </query>
+    </named-query>
+
+</entity-mappings>
