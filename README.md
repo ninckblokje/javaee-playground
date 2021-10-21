@@ -1,5 +1,27 @@
 # Java EE playground
 
+## Java EE specifications used
+
+- JAX-RS
+- JMS
+- JPA
+- JTA
+- JBatch
+
+## Working
+
+The [HelloResource](src/main/java/ninckblokje/playground/javaee/resource/HelloResource.java) starts the [helloWorld](src/main/resources/META-INF/batch-jobs/hello-world.xml)
+batch job. This job will create 100 items to be processed. Each item will be send to the JMS queue `HelloWorldQueue` and
+stored in the [BATCH_MESSAGE](src/main/java/ninckblokje/playground/javaee/entity/BatchMessage.java) table.
+
+If the query parameter `crashCount` is specified with a value greater than 0, then every Nth item will be crashed and no
+JMS message is send and no entry is stored in the database.
+
+[HelloWorldMessageListener](src/main/java/ninckblokje/playground/javaee/listener/HelloWorldMessageListener.java) listenes
+to the JMS queue `HelloWorldQueue` and will store every received message in the [JMS_MESSAGE](src/main/java/ninckblokje/playground/javaee/entity/JmsMessage.java)
+table. Every 20th received message is crashed and will not be stored in the database. The message is routed to the default
+ActiveMQ DLQ.
+
 ## TomEE ActiveMQ web console
 
 - Download the ActiveMQ web console from: https://search.maven.org/artifact/org.apache.activemq/activemq-web-console
